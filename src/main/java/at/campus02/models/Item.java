@@ -25,7 +25,7 @@ public class Item {
                 + "\n\tID: " + id
                 + "\n\tName: " + name
                 + "\n\tDescription: " + description
-                + "\n\tPrice: " + price
+                + "\n\tPrice [EUR]: " + price
                 + "\n";
     }
 }
