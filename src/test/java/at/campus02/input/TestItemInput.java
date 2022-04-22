@@ -7,10 +7,12 @@ import org.junit.Test;
 
 import java.io.EOFException;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.math.BigDecimal;
 
 import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertFalse;
 
 public class TestItemInput {
     @Test
@@ -51,5 +53,23 @@ public class TestItemInput {
 
         // verify
         verify(apiMock, times(1)).fromAPI();
+    }
+
+    @Test
+    public void testRemoveItem() throws EOFException {
+        InputHelper inputMock = mock(InputHelper.class);
+        when(inputMock.getItemId(InputHelper.ID_MUST_EXIST))
+                .thenReturn(2);
+        ItemInput itemInput = new ItemInput(
+                inputMock,
+                new PrintStream(OutputStream.nullOutputStream()),
+                null);
+        Database.setupSampleDatabase();
+
+        // execution
+        itemInput.removeItem();
+
+        // verify
+        assertFalse(Database.items.containsKey(2));
     }
 }
