@@ -3,22 +3,31 @@ package at.campus02.input;
 import at.campus02.exchange.ExchangeRates;
 import at.campus02.exchange.ExchangeRatesAPI;
 import at.campus02.storage.Database;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.EOFException;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.math.BigDecimal;
 
-import static org.mockito.Mockito.*;
 import static org.junit.Assert.assertFalse;
+import static org.mockito.Mockito.*;
 
 public class TestItemInput {
+    private InputHelper inputMock;
+    private PrintStream outMock;
+
+    @Before
+    public void setUp() {
+        inputMock = mock(InputHelper.class);
+        outMock = mock(PrintStream.class);
+        Database.setupSampleDatabase();
+    }
+
     @Test
     public void testViewItem() throws IOException {
         // setup
-        InputHelper inputMock = mock(InputHelper.class);
         ExchangeRatesAPI apiMock = mock(ExchangeRatesAPI.class);
         when(inputMock.getItemId(InputHelper.ID_MUST_EXIST))
                 .thenReturn(1);
@@ -28,9 +37,7 @@ public class TestItemInput {
                 BigDecimal.valueOf(5), // usd -> cad
                 BigDecimal.valueOf(7) // usd -> jpy
         ));
-        PrintStream outMock = mock(PrintStream.class);
         ItemInput itemInput = new ItemInput(inputMock, outMock, apiMock);
-        Database.setupSampleDatabase();
 
         // execution
         itemInput.viewItem();
@@ -57,14 +64,9 @@ public class TestItemInput {
 
     @Test
     public void testRemoveItem() throws EOFException {
-        InputHelper inputMock = mock(InputHelper.class);
-        when(inputMock.getItemId(InputHelper.ID_MUST_EXIST))
-                .thenReturn(2);
-        ItemInput itemInput = new ItemInput(
-                inputMock,
-                new PrintStream(OutputStream.nullOutputStream()),
-                null);
-        Database.setupSampleDatabase();
+        // setup
+        when(inputMock.getItemId(InputHelper.ID_MUST_EXIST)).thenReturn(2);
+        ItemInput itemInput = new ItemInput(inputMock, outMock, null);
 
         // execution
         itemInput.removeItem();
