@@ -1,13 +1,12 @@
 {
-  "success":true,
-  "terms":"https://currencylayer.com/terms",
-  "privacy":"https://currencylayer.com/privacy",
-  "timestamp":1647936723,
-  "source":"USD",
-  "quotes":{
-    "USDEUR":0.91005,
-    "USDGBP":0.760495,
-    "USDCAD":1.259775,
-    "USDJPY":120.432976
-  }
+    "success": true,
+    "timestamp": 1651321324,
+    "base": "USD",
+    "date": "2022-04-30",
+    "rates": {
+        "EUR": 0.94835,
+        "GBP": 0.795324,
+        "CAD": 1.284325,
+        "JPY": 129.78604
+    }
 }
