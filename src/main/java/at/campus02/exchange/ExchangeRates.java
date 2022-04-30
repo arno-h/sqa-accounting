@@ -41,12 +41,12 @@ public class ExchangeRates {
         if (!data.getBoolean("success")) {
             System.out.println("Answer does not indicate success.");
         }
-        JSONObject quotes = data.getJSONObject("quotes");
+        JSONObject quotes = data.getJSONObject("rates");
         return new ExchangeRates(
-                quotes.getBigDecimal("USDEUR"),
-                quotes.getBigDecimal("USDGBP"),
-                quotes.getBigDecimal("USDCAD"),
-                quotes.getBigDecimal("USDJPY")
+                quotes.getBigDecimal("EUR"),
+                quotes.getBigDecimal("GBP"),
+                quotes.getBigDecimal("CAD"),
+                quotes.getBigDecimal("JPY")
                 );
     }
 }
