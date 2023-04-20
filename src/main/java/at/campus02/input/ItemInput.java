@@ -23,15 +23,15 @@ public class ItemInput {
         System.out.print(item);
 
         try {
-//            ExchangeRatesAPI exchangeRatesAPI = ExchangeRatesAPI.fromConfig("exchangeRates.properties");
-//            ExchangeRates exchangeRates = exchangeRatesAPI.fromAPI();
-            ExchangeRates exchangeRates = ExchangeRatesAPI.fromFile("exchangeRatesSample.json");
+            ExchangeRatesAPI exchangeRatesAPI = ExchangeRatesAPI.fromConfig("exchangeRates.properties");
+            ExchangeRates exchangeRates = exchangeRatesAPI.fromAPI();
+//            ExchangeRates exchangeRates = ExchangeRatesAPI.fromFile("exchangeRatesSample.json");
             System.out.println("\tPrice [GBP]: " + exchangeRates.eur_in_gbp(item.price) +
                     "\n\tPrice [USD]: " + exchangeRates.eur_in_usd(item.price) +
                     "\n\tPrice [CAD]: " + exchangeRates.eur_in_cad(item.price) +
                     "\n\tPrice [JPY]: " + exchangeRates.eur_in_jpy(item.price) +
                     "\n");
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException e) {
             System.out.println("[Exchange rates currently unavailable]");
         }
     }
